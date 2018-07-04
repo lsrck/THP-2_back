@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/bin/node /usr/share/yarn/bin/yarn.js add husky --dev
+  /usr/bin/node /usr/share/yarn/bin/yarn.js run -s precommit
 
 PATH: 
   /home/louis/.rvm/gems/ruby-2.5.1/bin:/home/louis/.rvm/gems/ruby-2.5.1@global/bin:/home/louis/.rvm/rubies/ruby-2.5.1/bin:/home/louis/.rvm/bin:/home/louis/bin:/home/louis/.local/bin:/home/louis/bin:/home/louis/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
