@@ -12,10 +12,16 @@
 require 'rails_helper'
 
 RSpec.describe Lesson, type: :model do
-  it "should create a lesson" do
-    lessons = Lesson.count
-    create(:lesson)
-    lessons += 1
-    expect(Lesson.count).to eq(lessons)
+  it "is creatable" do
+    lesson = create(:lesson)
+    expect(Lesson.first.title).to eq(lesson.title)
+  end
+end
+
+RSpec.describe Lesson, type: :model do
+  context "validation" do
+    it { should validate_length_of(:title).is_at_most(50) }
+    it { should validate_length_of(:description).is_at_most(300) }
+    it { should validate_presence_of(:title) }
   end
 end
