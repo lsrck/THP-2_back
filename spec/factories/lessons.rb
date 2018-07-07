@@ -11,7 +11,7 @@
 
 FactoryBot.define do
   factory :lesson do
-    title { Faker::Pokemon.name }
-    description { Faker::Pokemon.move }
+    title { Faker::Pokemon.name.first(50) }
+    description { Faker::Pokemon.move.first(300) }
   end
 end

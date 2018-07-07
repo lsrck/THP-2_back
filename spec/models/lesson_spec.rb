@@ -15,6 +15,7 @@ RSpec.describe Lesson, type: :model do
   it "is creatable" do
     lesson = create(:lesson)
     expect(Lesson.first.title).to eq(lesson.title)
+    expect(lesson.title).not_to be_blank
   end
 end
 
