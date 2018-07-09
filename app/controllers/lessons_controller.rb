@@ -1,11 +1,18 @@
 class LessonsController < ApplicationController
-  def create; end
+  def create
+  end
 
-  def index; end
+  def index
+  end
 
-  def show; end
+  def show
+    lesson = Lesson.find(params[:id])
+    render json: lesson
+  end
 
-  def update; end
+  def update
+  end
 
-  def destroy; end
+  def destroy
+  end
 end
