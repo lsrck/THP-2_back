@@ -1,10 +1,12 @@
 class LessonsController < ApplicationController
   def create
-    lessons = Lessons.order(created_at)
-    render json: lessons
+    lesson = Lesson.create(params[:id])
   end
 
-  def index; end
+  def index
+    lessons = Lesson.order(:created_at)
+    render json: lessons
+  end
 
   def show
     lesson = Lesson.find(params[:id])
