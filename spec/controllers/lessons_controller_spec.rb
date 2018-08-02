@@ -4,8 +4,8 @@ RSpec.describe LessonsController, type: :controller do
   describe "#create"
 
   describe "#index" do
-  #let permet de définir la variable :lessons et lorsqu'on appelle cette variable elle renvoit le block qui suit
-  #le ! permet de lancer la création des tortues avant le test. dans le cas d'aprè sla création est appelée via l'id
+    # let permet de définir la variable :lessons et lorsqu'on appelle cette variable elle renvoit le block qui suit
+    # le ! permet de lancer la création des tortues avant le test. dans le cas d'aprè sla création est appelée via l'id
     let!(:lessons) { create_list(:lesson, 5) }
 
     subject do
@@ -14,8 +14,8 @@ RSpec.describe LessonsController, type: :controller do
 
     it "returns all the lessons" do
       subject
-        expect(response.status).to eq(200)
-        expect(json_response[:lessons].size).to eq(5)
+      expect(response.status).to eq(200)
+      expect(json_response[:lessons].size).to eq(5)
     end
   end
 
@@ -29,22 +29,50 @@ RSpec.describe LessonsController, type: :controller do
 
     it "returns the lesson" do
       subject
-        expect(json_response[:lesson][:id]).to eq(lesson.id)
-        expect(json_response[:lesson][:title]).to eq(lesson.title)
-        expect(json_response[:lesson][:description]).to eq(lesson.description)
+      expect(json_response[:lesson][:id]).to eq(lesson.id)
+      expect(json_response[:lesson][:title]).to eq(lesson.title)
+      expect(json_response[:lesson][:description]).to eq(lesson.description)
     end
 
-    context "the lesson doest not exist"do
+    context "the lesson doest not exist" do
       let(:id) { "123" }
 
       it "returns not found" do
         subject
-          expect(response).to be_not_found
-          expect(response.status).to eq(404)
+        expect(response).to be_not_found
+        expect(response.status).to eq(404)
       end
     end
   end
 
   describe "#update"
-  describe "#destroy"
+
+  describe "#destroy" do
+    let!(:lesson) { create(:lesson) }
+    let(:id) { lesson.id }
+
+    subject do
+      delete :destroy, params: { id: id }
+    end
+
+    it "destroy the lesson" do
+      expect { subject }.to change(Lesson, :count).from(1).to(0)
+      expect(response.status).to eq(204)
+    end
+
+    it "returns no content" do
+      subject
+      expect(response).to be_no_content
+    end
+
+    context "the lesson doest not exist" do
+      let(:id) { "123" }
+
+      it "returns not found" do
+        expect { subject }.not_to change(Lesson, :count)
+        expect(response).to be_not_found
+        expect(response.status).to eq(404)
+      end
+    end
+  end
 end

@@ -1,7 +1,5 @@
 class LessonsController < ApplicationController
-  def create
-    lesson = Lesson.create(params[:id])
-  end
+  def create; end
 
   def index
     lessons = Lesson.order(:created_at)
@@ -15,5 +13,10 @@ class LessonsController < ApplicationController
 
   def update; end
 
-  def destroy; end
+  def destroy
+    lesson= Lesson.find(params[:id])
+    lesson.destroy
+    #envoie une response vide (204)
+    head :no_content
+  end
 end
