@@ -18,7 +18,15 @@ class LessonsController < ApplicationController
     render json: lesson
   end
 
-  def update; end
+  def update
+    lesson = Lesson.find(params[:id])
+    lesson.update(update_params)
+    if lesson.errors.empty?
+      render json: lesson
+    else
+      render json: { errors: lesson.errors }, status: :forbidden
+    end
+  end
 
   def destroy
     lesson = Lesson.find(params[:id])
@@ -30,6 +38,10 @@ class LessonsController < ApplicationController
   private
 
   def create_params
+    params.permit(:title, :description)
+  end
+
+  def update_params
     params.permit(:title, :description)
   end
 end

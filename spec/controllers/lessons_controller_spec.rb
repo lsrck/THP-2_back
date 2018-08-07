@@ -70,7 +70,30 @@ RSpec.describe LessonsController, type: :controller do
     end
   end
 
-  describe "#update"
+  describe "#update" do
+    let!(:lesson) { create(:lesson) }
+    let(:id) { lesson.id }
+    let(:title) { Faker::LeagueOfLegends.champion.first(50) }
+
+    subject do
+      patch :update, params: { id: id, title: title }
+    end
+
+    it "change the lesson name" do
+      expect { subject }.to change { lesson.reload.title }.to(title)
+      expect(json_response[:lesson][:title]).to eq(lesson.title)
+    end
+
+    context "the lesson doest not exist" do
+      let(:id) { "123" }
+
+      it "returns not found" do
+        expect { subject }.not_to change(Lesson, :count)
+        expect(response).to be_not_found
+        expect(response.status).to eq(404)
+      end
+    end
+  end
 
   describe "#destroy" do
     let!(:lesson) { create(:lesson) }
