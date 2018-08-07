@@ -1,7 +1,32 @@
 require 'rails_helper'
 
 RSpec.describe LessonsController, type: :controller do
-  describe "#create"
+  describe "#create" do
+    let(:title) { Faker::LeagueOfLegends.champion.first(50) }
+    let(:description) { Faker::HarryPotter.quote.first(300) }
+
+    subject do
+      post :create, params: { title: title, description: description }
+    end
+
+    it "creates the lesson" do
+      expect { subject }.to change(Lesson, :count).by(1)
+      expect(json_response[:lesson][:title]).to eq(title)
+      expect(json_response[:lesson][:description]).to eq(description)
+      first_lesson = Lesson.first
+      expect(first_lesson.title).to eq(title)
+      expect(first_lesson.description).to eq(description)
+    end
+
+    context "with no title" do
+      let!(:title) { nil }
+
+      it "fails creating the lesson" do
+        expect { subject }.not_to(change(Lesson, :count))
+        expect(response.status).to eq(403)
+      end
+    end
+  end
 
   describe "#index" do
     # let permet de définir la variable :lessons et lorsqu'on appelle cette variable elle renvoit le block qui suit

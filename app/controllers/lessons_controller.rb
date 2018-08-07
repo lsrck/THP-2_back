@@ -1,11 +1,11 @@
 class LessonsController < ApplicationController
   def create
     lesson = Lesson.create(create_params)
-      if lesson.errors.empty?
-        render json: lesson
-      else 
-        render json: {errors: lesson.errors}, status: :forbidden
-      end
+    if lesson.errors.empty?
+      render json: lesson
+    else
+      render json: { errors: lesson.errors }, status: :forbidden
+    end
   end
 
   def index
@@ -30,6 +30,6 @@ class LessonsController < ApplicationController
   private
 
   def create_params
-    params.permit(:id, :name, :color)
+    params.permit(:title, :description)
   end
 end
