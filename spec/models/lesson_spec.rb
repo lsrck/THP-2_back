@@ -8,16 +8,16 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
-=begin
+
 require 'rails_helper'
 
-RSpec.describe Lesson, type: :model do
-  it "is creatable" do
-    lesson = create(:lesson)
-    expect(Lesson.first.title).to eq(lesson.title)
-    expect(lesson.title).not_to be_blank
-  end
-end
+# RSpec.describe Lesson, type: :model do
+#  it "is creatable" do
+#    lesson = create(:lesson)
+#    expect(Lesson.first.title).to eq(lesson.title)
+#    expect(lesson.title).not_to be_blank
+#  end
+# end
 
 RSpec.describe Lesson, type: :model do
   context "validation" do
@@ -26,4 +26,3 @@ RSpec.describe Lesson, type: :model do
     it { is_expected.to validate_presence_of(:title) }
   end
 end
-=end
