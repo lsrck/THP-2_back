@@ -19,10 +19,10 @@ require 'rails_helper'
 #  end
 # end
 
-RSpec.describe Lesson, type: :model do
-  context "validation" do
-    it { is_expected.to validate_length_of(:title).is_at_most(50) }
-    it { is_expected.to validate_length_of(:description).is_at_most(300) }
-    it { is_expected.to validate_presence_of(:title) }
-  end
-end
+# RSpec.describe Lesson, type: :model do
+#   context "validation" do
+#     it { is_expected.to validate_length_of(:title).is_at_most(50) }
+#     it { is_expected.to validate_length_of(:description).is_at_most(300) }
+#     it { is_expected.to validate_presence_of(:title) }
+#   end
+# end
