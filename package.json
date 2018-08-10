@@ -1,7 +1,7 @@
 {
  "scripts": {
    "precommit": "rubocop && annotate",
-   "prepush": "rubocop && rspec --format progress"
+   "prepush": "rubocop && RAILS_ENV=true rspec --format progress"
  },
  "dependencies": {
    "husky": "^0.14.3"
