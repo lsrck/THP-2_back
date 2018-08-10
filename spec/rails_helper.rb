@@ -65,22 +65,3 @@ Shoulda::Matchers.configure do |config|
     with.library :rails
   end
 end
-
-if ENV['RAILS_ENV'] == 'test'
-  require 'simplecov'
-  SimpleCov.start 'rails'
-  puts "required simplecov"
-end
-
-SimpleCov.start do
-  add_group "Serializers", "app/serializers"
-  add_filter do |source_file|
-    source_file.lines.count < 5
-  end
-end
-
-SimpleCov.at_exit do
-  SimpleCov.result.format!
-  SimpleCov.minimum_coverage 95
-  SimpleCov.minimum_coverage_by_file 90
-end
