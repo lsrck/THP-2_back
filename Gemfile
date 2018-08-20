@@ -30,6 +30,11 @@ gem 'devise_token_auth', '~> 0.1', github: 'denispasin/devise_token_auth'
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
+gem 'active_model_serializers', '~> 0.10.0'
+
+group :production do
+  gem 'sentry-raven'
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -42,12 +47,17 @@ group :test do
   gem 'rspec-rails', '~> 3.7'
   gem 'rubocop', require: false
   gem 'shoulda-matchers', '~> 3.1'
+  gem 'simplecov', require: false
 end
 
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'annotate'
+  gem 'guard'
+  gem 'guard-annotate'
+  gem 'guard-rspec', require: false
+  gem 'guard-rubocop'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
