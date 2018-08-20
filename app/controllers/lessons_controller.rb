@@ -1,6 +1,6 @@
 class LessonsController < ApplicationController
   def create
-    lesson = Lesson.create(create_params)
+    lesson = Lesson.create!(create_params)
     if lesson.errors.empty?
       render json: lesson
     else
